@@ -1,0 +1,50 @@
+//admin
+	-access to the database
+	-registers new users
+	-approves and uploads any recipe provided by the user
+
+//users
+	-can see all recipes uploaded to system
+	-can search through recipes
+	-register/login to system
+	-can add details of food
+	-can upload recipe
+	
+Classes:
+	//System
+		-interface
+			*user login/registration
+			*admin login
+			*about page
+			*help page
+		-login ability
+		-admin capabilities
+		-database of recipes
+//TO-DO
+	-create a database (DONE)
+	-create interface/website
+	-create login authentication ability
+	
+
+public static void main(String[] args) {
+		String url = "jdbc:mysql://localhost:3306/world";
+		String username = "java";
+		String password = "password";
+		
+		System.out.println("Connecting database....");
+		
+		try(Connection connection = DriverManager.getConnection(url, username, password)){
+			System.out.println("Database connected!");
+			
+			String query = "select Name from city";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				String s = rs.getString("Name");
+				System.out.println(s);
+			}
+		} catch(SQLException e) {
+			throw new IllegalStateException("Cannot connect", e);
+		}
+		
+	}
